@@ -35,7 +35,9 @@ export const useMovieStore = defineStore('movies', () => {
 
   // Charge la première page appelé au montage de la page liste
   // ou quand la recherche change
-  async function loadMovies() {
+  async function loadMovies(force: boolean = false) {
+    // Si des films sont déjà chargés et qu'on ne force pas, on ne recharge pas
+    if (movies.value.length > 0 && !force) return
     // On repart de zéro : on vide la liste et on reset la pagination
     movies.value = []
     currentPage.value = 1
