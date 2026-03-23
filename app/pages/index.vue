@@ -2,9 +2,12 @@
 import { onMounted, ref } from 'vue'
 import { useMovieStore } from '../../stores/movieStore'
 import { useDebounceFn, useIntersectionObserver } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 
 // On récupère le store c'est lui qui gère toute la logique
 const movieStore = useMovieStore()
+
+const { t } = useI18n()
 
 // Référence vers l'élément sentinel en bas de page
 // Quand cet élément devient visible, on charge plus de films
@@ -40,7 +43,7 @@ onMounted(() => {
     <!-- En-tête -->
     <div class="mb-8 flex flex-col items-center gap-4">
       <h1 class="text-3xl font-bold text-white">
-        🎬 Cinéma
+        {{ t('home.title') }}
       </h1>
 
       <!-- Barre de recherche -->
@@ -51,7 +54,7 @@ onMounted(() => {
         />
         <input
           type="text"
-          placeholder="Rechercher un film..."
+          :placeholder="t('home.search_placeholder')"
           class="w-full rounded-xl bg-gray-800 py-3 pl-10 pr-4 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-500"
           @input="onSearch($event)"
         />
@@ -60,7 +63,7 @@ onMounted(() => {
 
     <!-- Message d'erreur -->
     <p v-if="movieStore.error" class="text-center text-red-400">
-      {{ movieStore.error }}
+      {{ t('common.error') }}
     </p>
 
     <!-- Grille de films -->
