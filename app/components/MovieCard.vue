@@ -5,6 +5,7 @@ import type { Movie } from '../../types/movie'
 // defineProps dit à Vue ce que ce composant reçoit depuis son parent.
 const props = defineProps<{
   movie: Movie
+  index?: number
 }>()
 
 // Construit l'URL complète de l'affiche à partir du chemin partiel retourné par TMDB.
@@ -23,9 +24,10 @@ const year = computed(() => props.movie.release_date?.split('-')[0] ?? '—')
 </script>
 
 <template>
-  <NuxtLink :to="`/movies/${movie.id}`">
+<NuxtLink :to="`/movies/${movie.id}`">
   <article
-    class="group relative overflow-hidden rounded-xl bg-gray-900 cursor-pointer transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+    class="group relative overflow-hidden rounded-xl bg-gray-900 cursor-pointer transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl animate-fade-in"
+    :style="{ animationDelay: `${Math.min((props.index ?? 0) * 30, 300)}ms` }"
   >
     <!-- Affiche du film -->
     <div class="aspect-[2/3] overflow-hidden">
