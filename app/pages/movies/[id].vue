@@ -173,6 +173,11 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+    <!-- Commentaires -->
+    <div class="px-6 pb-12 space-y-8">
+        <CommentForm :movie-id="movie.id" />
+        <CommentList :movie-id="movie.id" />
+    </div>
     </div>
   </main>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { Movie } from '../types/movie'
+import type { Movie } from '../../types/movie'
 
 // defineProps dit à Vue ce que ce composant reçoit depuis son parent.
 const props = defineProps<{
