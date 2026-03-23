@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { ref, computed, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { getMovieDetail } from '../../../services/tmdb'
 import type { MovieDetail } from '../../../types/movie'
 
-const { t } = useI18n()
 
 // useRoute() donne accès aux paramètres de l'URL
 // Si l'URL est /movies/27205, route.params.id vaut "27205"
@@ -47,7 +45,7 @@ onMounted(async () => {
     movie.value = await getMovieDetail(id)
   }
   catch {
-    error.value = t('movie.error')
+    error.value = 'Impossible de charger ce film.'
   }
   finally {
     isLoading.value = false
@@ -56,7 +54,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="min-h-screen bg-gray-950 text-white">
+  <main class="min-h-screen bg-gray-950 text-white pt-16">
 
     <!-- Bouton retour -->
     <div class="px-6 py-4">
@@ -65,7 +63,7 @@ onMounted(async () => {
         class="inline-flex items-center gap-2 text-gray-400 transition hover:text-white"
       >
         <Icon name="heroicons:arrow-left" class="h-5 w-5" />
-        {{ t('common.back') }}
+        Retour
       </NuxtLink>
     </div>
 
@@ -124,7 +122,7 @@ onMounted(async () => {
             <!-- Note TMDB -->
             <span class="flex items-center gap-1">
               <Icon name="heroicons:star-solid" class="h-4 w-4 text-yellow-400" />
-              {{ rating }} ({{ movie.vote_count.toLocaleString() }} {{ t('movie.rating') }})
+              {{ rating }} ({{ movie.vote_count.toLocaleString() }} votes)
             </span>
 
             <!-- Durée -->
@@ -132,7 +130,7 @@ onMounted(async () => {
 
             <!-- Réalisateur -->
             <span v-if="movie.director">
-              {{ t('movie.directed_by') }} <strong>{{ movie.director }}</strong>
+              Réalisé par <strong>{{ movie.director }}</strong>
             </span>
           </div>
 
@@ -156,7 +154,7 @@ onMounted(async () => {
 
       <!-- Casting -->
       <div class="px-6 pb-8">
-        <h2 class="mb-4 text-xl font-semibold">{{ t('movie.cast') }}</h2>
+        <h2 class="mb-4 text-xl font-semibold">Têtes d'affiche</h2>
         <div class="flex gap-4 overflow-x-auto pb-2">
           <div
             v-for="member in movie.cast"
@@ -175,12 +173,11 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-
-      <!-- Commentaires -->
-      <div class="px-6 pb-12 space-y-8">
+    <!-- Commentaires -->
+    <div class="px-6 pb-12 space-y-8">
         <CommentForm :movie-id="movie.id" />
         <CommentList :movie-id="movie.id" />
-      </div>
+    </div>
     </div>
   </main>
 </template>
