@@ -94,6 +94,8 @@ export const useMovieStore = defineStore('movies', () => {
   function setSearchQuery(query: string) {
     searchQuery.value = query
     loadMovies(true)
+    // Remonte en haut quand la recherche change
+    window.scrollTo(0, 0)
   }
 
   return {
