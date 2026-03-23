@@ -93,7 +93,7 @@ export const useMovieStore = defineStore('movies', () => {
   // Met à jour la recherche et recharge depuis le début
   function setSearchQuery(query: string) {
     searchQuery.value = query
-    loadMovies()
+    loadMovies(true)
   }
 
   return {
