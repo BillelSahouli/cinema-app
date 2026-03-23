@@ -2,8 +2,11 @@
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, maxLength, alpha, between, helpers } from '@vuelidate/validators'
 import { useCommentStore } from '../../stores/commentStore'
+import { useI18n } from 'vue-i18n'
 import type { CommentForm } from '../../types/comment'
 import { reactive } from 'vue'
+
+const { t } = useI18n()
 
 // Le composant reçoit l'id du film depuis la page détail
 const props = defineProps<{
@@ -12,7 +15,7 @@ const props = defineProps<{
 
 const commentStore = useCommentStore()
 
-// État du formulaire  correspond exactement à notre interface CommentForm
+// État du formulaire correspond exactement à notre interface CommentForm
 const form = reactive<CommentForm>({
   username: '',
   message: '',
@@ -30,9 +33,9 @@ const rules = {
   message: {
     required,
     alphaNumExtended: helpers.withMessage(
-    'Le message ne doit contenir que des lettres, chiffres et espaces.',
-    helpers.regex(/^[a-zA-ZÀ-ÿ0-9\s.,!?'"-]+$/)
-  ),                 // lettres et chiffres
+      t('comments.errors.message_invalid'),
+      helpers.regex(/^[a-zA-ZÀ-ÿ0-9\s.,!?'"-]+$/)
+    ),
     minLength: minLength(3),
     maxLength: maxLength(500),
   },
@@ -71,60 +74,60 @@ async function onSubmit() {
     <!-- Username -->
     <div>
       <label class="mb-1 block text-sm font-medium text-gray-300">
-        Nom d'utilisateur
+        {{ t('comments.username') }}
       </label>
       <input
         v-model="form.username"
         type="text"
-        placeholder="Votre nom..."
+        :placeholder="t('comments.username_placeholder')"
         class="w-full rounded-xl bg-gray-800 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:ring-2"
         :class="v$.username.$error ? 'ring-2 ring-red-500' : 'focus:ring-blue-500'"
       />
       <!-- Messages d'erreur -->
       <p v-if="v$.username.required.$invalid && v$.username.$dirty" class="mt-1 text-xs text-red-400">
-        Le nom d'utilisateur est requis.
+        {{ t('comments.errors.username_required') }}
       </p>
-      <p v-else-if="v$.message.alphaNumExtended.$invalid && v$.message.$dirty" class="mt-1 text-xs text-red-400">
-        Le message ne doit contenir que des lettres, chiffres et espaces.
+      <p v-else-if="v$.username.alpha.$invalid && v$.username.$dirty" class="mt-1 text-xs text-red-400">
+        {{ t('comments.errors.username_alpha') }}
       </p>
       <p v-else-if="v$.username.minLength.$invalid && v$.username.$dirty" class="mt-1 text-xs text-red-400">
-        Minimum 3 caractères.
+        {{ t('comments.errors.username_min') }}
       </p>
       <p v-else-if="v$.username.maxLength.$invalid && v$.username.$dirty" class="mt-1 text-xs text-red-400">
-        Maximum 50 caractères.
+        {{ t('comments.errors.username_max') }}
       </p>
     </div>
 
     <!-- Message -->
     <div>
       <label class="mb-1 block text-sm font-medium text-gray-300">
-        Message
+        {{ t('comments.message') }}
       </label>
       <textarea
         v-model="form.message"
         rows="4"
-        placeholder="Votre commentaire..."
+        :placeholder="t('comments.message_placeholder')"
         class="w-full rounded-xl bg-gray-800 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:ring-2 resize-none"
         :class="v$.message.$error ? 'ring-2 ring-red-500' : 'focus:ring-blue-500'"
       />
       <p v-if="v$.message.required.$invalid && v$.message.$dirty" class="mt-1 text-xs text-red-400">
-        Le message est requis.
+        {{ t('comments.errors.message_required') }}
       </p>
-        <p v-else-if="v$.message.alphaNumExtended.$invalid && v$.message.$dirty" class="mt-1 text-xs text-red-400">
-        Le message ne doit contenir que des lettres, chiffres et espaces.
-        </p>
+      <p v-else-if="v$.message.alphaNumExtended.$invalid && v$.message.$dirty" class="mt-1 text-xs text-red-400">
+        {{ t('comments.errors.message_invalid') }}
+      </p>
       <p v-else-if="v$.message.minLength.$invalid && v$.message.$dirty" class="mt-1 text-xs text-red-400">
-        Minimum 3 caractères.
+        {{ t('comments.errors.message_min') }}
       </p>
       <p v-else-if="v$.message.maxLength.$invalid && v$.message.$dirty" class="mt-1 text-xs text-red-400">
-        Maximum 500 caractères.
+        {{ t('comments.errors.message_max') }}
       </p>
     </div>
 
     <!-- Note -->
     <div>
       <label class="mb-1 block text-sm font-medium text-gray-300">
-        Note (1 à 10)
+        {{ t('comments.rating') }}
       </label>
       <div class="flex gap-2">
         <button
@@ -141,7 +144,7 @@ async function onSubmit() {
         </button>
       </div>
       <p v-if="v$.rating.$error && v$.rating.$dirty" class="mt-1 text-xs text-red-400">
-        Veuillez sélectionner une note.
+        {{ t('comments.errors.rating_required') }}
       </p>
     </div>
 
@@ -150,7 +153,7 @@ async function onSubmit() {
       type="submit"
       class="rounded-xl bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-500"
     >
-      Publier le commentaire
+      {{ t('comments.submit') }}
     </button>
 
   </form>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useCommentStore } from '../../stores/commentStore'
-import {computed} from 'vue';
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   movieId: number
@@ -16,11 +19,11 @@ const comments = computed(() =>
 
 <template>
   <div>
-    <h2 class="mb-6 text-xl font-semibold text-white">Commentaires</h2>
+    <h2 class="mb-6 text-xl font-semibold text-white">{{ t('comments.list_title') }}</h2>
 
     <!-- Aucun commentaire -->
     <p v-if="comments.length === 0" class="text-gray-400">
-      Aucun commentaire pour l'instant. Soyez le premier !
+      {{ t('comments.no_comments') }}
     </p>
 
     <!-- Liste -->
