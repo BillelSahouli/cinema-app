@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useMovieStore } from '../../stores/movieStore'
 import { useDebounceFn, useIntersectionObserver } from '@vueuse/core'
 
-// On récupère le store — c'est lui qui gère toute la logique
+// On récupère le store c'est lui qui gère toute la logique
 const movieStore = useMovieStore()
 
 // Référence vers l'élément sentinel en bas de page
@@ -11,7 +11,7 @@ const movieStore = useMovieStore()
 const sentinel = ref<HTMLElement | null>(null)
 
 // useDebounceFn attend que l'utilisateur arrête de taper pendant 400ms
-// avant d'appeler setSearchQuery — évite un appel API à chaque frappe
+// avant d'appeler setSearchQuery évite un appel API à chaque frappe
 const debouncedSearch = useDebounceFn((value: string) => {
   movieStore.setSearchQuery(value)
 }, 400)
@@ -67,9 +67,10 @@ onMounted(() => {
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       <!-- Films chargés -->
       <MovieCard
-        v-for="movie in movieStore.movies"
+        v-for="(movie, index) in movieStore.movies"
         :key="movie.id"
         :movie="movie"
+        :index="index"
       />
 
       <!-- Skeletons pendant le chargement -->
@@ -78,7 +79,7 @@ onMounted(() => {
       </template>
     </div>
 
-    <!-- Sentinel — élément invisible en bas de page -->
+    <!-- Sentinel élément invisible en bas de page -->
     <!-- Quand il devient visible, useIntersectionObserver déclenche loadMore -->
     <div ref="sentinel" class="h-10" />
   </main>
