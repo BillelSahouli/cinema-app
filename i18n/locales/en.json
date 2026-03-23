@@ -1,0 +1,41 @@
+{
+  "common": {
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "An error has occurred."
+  },
+  "home": {
+    "title": "🎬 Cinema",
+    "search_placeholder": "Search for a movie...",
+    "no_results": "No movies found."
+  },
+  "movie": {
+    "directed_by": "Directed by",
+    "cast": "Top cast",
+    "rating": "votes",
+    "genres": "Genres",
+    "error": "Unable to load this movie."
+  },
+  "comments": {
+    "title": "Leave a comment",
+    "list_title": "Comments",
+    "no_comments": "No comments yet. Be the first!",
+    "username": "Username",
+    "username_placeholder": "Your name...",
+    "message": "Message",
+    "message_placeholder": "Your comment...",
+    "rating": "Rating (1 to 10)",
+    "submit": "Publish comment",
+    "errors": {
+      "username_required": "Username is required.",
+      "username_alpha": "Name must contain only letters.",
+      "username_min": "Minimum 3 characters.",
+      "username_max": "Maximum 50 characters.",
+      "message_required": "Message is required.",
+      "message_invalid": "Message must contain only letters, numbers and spaces.",
+      "message_min": "Minimum 3 characters.",
+      "message_max": "Maximum 500 characters.",
+      "rating_required": "Please select a rating."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "common": {
+    "back": "Retour",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue."
+  },
+  "home": {
+    "title": "🎬 Cinéma",
+    "search_placeholder": "Rechercher un film...",
+    "no_results": "Aucun film trouvé."
+  },
+  "movie": {
+    "directed_by": "Réalisé par",
+    "cast": "Têtes d'affiche",
+    "rating": "votes",
+    "genres": "Genres",
+    "error": "Impossible de charger ce film."
+  },
+  "comments": {
+    "title": "Laisser un commentaire",
+    "list_title": "Commentaires",
+    "no_comments": "Aucun commentaire pour l'instant. Soyez le premier !",
+    "username": "Nom d'utilisateur",
+    "username_placeholder": "Votre nom...",
+    "message": "Message",
+    "message_placeholder": "Votre commentaire...",
+    "rating": "Note (1 à 10)",
+    "submit": "Publier le commentaire",
+    "errors": {
+      "username_required": "Le nom d'utilisateur est requis.",
+      "username_alpha": "Le nom ne doit contenir que des lettres.",
+      "username_min": "Minimum 3 caractères.",
+      "username_max": "Maximum 50 caractères.",
+      "message_required": "Le message est requis.",
+      "message_invalid": "Le message ne doit contenir que des lettres, chiffres et espaces.",
+      "message_min": "Minimum 3 caractères.",
+      "message_max": "Maximum 500 caractères.",
+      "rating_required": "Veuillez sélectionner une note."
+    }
+  }
+}
