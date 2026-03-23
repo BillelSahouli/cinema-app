@@ -1,5 +1,5 @@
 // Centralise tous les appels à l'API TMDB.
-// Aucune page ou composant n'appelle TMDB directement — tout passe par ici.
+// Aucune page ou composant n'appelle TMDB directement tout passe par ici.
 
 import { useRuntimeConfig } from 'nuxt/app'
 import type { CastMember, MovieDetail, PaginatedMovies } from '../types/movie'
@@ -21,12 +21,12 @@ async function tmdbFetch<T>(endpoint: string, query: Record<string, unknown> = {
   })
 }
 
-// Récupère les films populaires — utilisé pour la liste avec infinite scroll
+// Récupère les films populaires utilisé pour la liste avec infinite scroll
 export async function getPopularMovies(page: number = 1): Promise<PaginatedMovies> {
   return tmdbFetch<PaginatedMovies>('/movie/popular', { page })
 }
 
-// Recherche des films par nom — utilisé pour la barre de recherche
+// Recherche des films par nom utilisé pour la barre de recherche
 export async function searchMovies(query: string, page: number = 1): Promise<PaginatedMovies> {
   return tmdbFetch<PaginatedMovies>('/search/movie', { query, page })
 }
