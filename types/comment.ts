@@ -1,4 +1,3 @@
-// types/comment.ts
 // Représente un commentaire utilisateur stocké en localStorage.
 // Les commentaires sont rattachés à un film via movieId et triés par createdAt décroissant.
 

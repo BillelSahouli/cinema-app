@@ -1,4 +1,3 @@
-// types/movie.ts
 // Représente un film tel que retourné par l'endpoint /movie/popular et /search/movie de l'API TMDB.
 // On ne mappe que les champs affichés dans l'UI — pas la totalité de la réponse TMDB.
 
