@@ -1,10 +1,11 @@
 // Gère l'état global des films : liste, pagination, recherche et infinite scroll.
 // Toutes les pages qui ont besoin des films passent par ce store.
 
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { getPopularMovies, searchMovies } from '../services/tmdb'
 import type { Movie } from '../types/movie'
-import { computed, ref } from 'vue'
+
 
 export const useMovieStore = defineStore('movies', () => {
 
