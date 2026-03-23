@@ -23,6 +23,7 @@ const year = computed(() => props.movie.release_date?.split('-')[0] ?? '—')
 </script>
 
 <template>
+  <NuxtLink :to="`/movies/${movie.id}`">
   <article
     class="group relative overflow-hidden rounded-xl bg-gray-900 cursor-pointer transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
   >
@@ -54,4 +55,5 @@ const year = computed(() => props.movie.release_date?.split('-')[0] ?? '—')
       </div>
     </div>
   </article>
+  </NuxtLink>
 </template>
