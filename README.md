@@ -80,7 +80,7 @@ i18n/
 ## Installation
 ```bash
 # Cloner le projet
-git clone https://github.com/TON_USERNAME/cinema-app.git
+git clone https://github.com/BillelSahouli/cinema-app.git
 cd cinema-app
 
 # Installer les dépendances
